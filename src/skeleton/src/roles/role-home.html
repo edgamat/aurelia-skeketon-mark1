@@ -1,0 +1,83 @@
+﻿<template>
+    <require from="blur-image"></require>
+    <section class="au-animate">
+        <h2>${heading}</h2>
+
+        <form role="form">
+            <p>
+                Select a role to view and manage the associated users and permissions for that role!
+            </p>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="selectedRole" class="control-label">Selected Role:</label><br />
+                    <select id="selectedRole" class="form-control" style="width: 50%" value.bind="selectedRoleId" change.trigger="selectedRoleChange($event.target)">
+                        <option repeat.for="role of roles" model.bind="role.roleId">
+                            ${role.roleName}
+                        </option>
+                    </select>
+                    <br /><br />
+                </div>
+
+                <div class="col-md-5 col-md-offset-1">
+                    <label>Role Users:</label><br />
+                    <div>
+                        <table class="table table-condensed table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>User Name</th>
+                                    <th>Full Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr repeat.for="userRole of userRoles">
+                                    <td>
+                                        <a route-href="route: users-detail; params.bind: { id: userRole.userId }">${userRole.userName}</a>
+                                    </td>
+                                    <td>
+                                        ${userRole.fullName}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div><br />
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-xs-5"><label>Unassigned Permissions:</label></div>
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-5"><label>Assigned Permissions:</label></div>
+                    </div>
+
+                    <div>
+                        <div class="row">
+                            <div class="col-xs-5">
+                                <select multiple size="10" class="form-control">
+
+                                </select>
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-default btn-block btn-sm" data-dual-select="removeAll"><i class="fa fa-angle-double-left"></i></button>
+                                    <button type="button" class="btn btn-default btn-block btn-sm" data-dual-select="remove"><i class="fa fa-angle-left"></i></button>
+                                    <button type="button" class="btn btn-default btn-block btn-sm" data-dual-select="add"><i class="fa fa-angle-right"></i></button>
+                                    <button type="button" class="btn btn-default btn-block btn-sm" data-dual-select="addAll"><i class="fa fa-angle-double-right"></i></button>
+                                </div>
+                            </div>
+                            <div class="col-xs-5">
+                                <select multiple size="10" class="form-control"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+
+    </section>
+</template>
