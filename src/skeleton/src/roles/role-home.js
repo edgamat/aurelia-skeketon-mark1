@@ -36,15 +36,15 @@ export class RoleHome {
     movePermission(e, action) {
         console.log(action);
 
-        if (action === "removeAll") {
+        if (action === "addAll") {
             for (var i = 0; i < this.unassignedPermissions.length; i++) {
                 this.assignedPermissions.push(this.unassignedPermissions[i]);
             }
-
+            
             this.unassignedPermissions = [];
         }
 
-        if (action === "addAll") {
+        if (action === "removeAll") {
             for (var i = 0; i < this.assignedPermissions.length; i++) {
                 this.unassignedPermissions.push(this.assignedPermissions[i]);
             }
@@ -52,44 +52,21 @@ export class RoleHome {
             this.assignedPermissions = [];
         }
 
-        if (action === "add") {
-
-            let itemsToRemove = [];
-
+        if (action === "remove") {
             for (var i = 0; i < this.assignedPermissionList.length; i++) {
-                
-                console.log(this.assignedPermissionList[i]);
-
                 let itemToRemove = this.assignedPermissions.indexOf(this.assignedPermissionList[i]);
-
-                //// this.unassignedPermissions.push(this.assignedPermissions[itemToRemove]);
-
-                //// itemsToRemove.push(this.assignedPermissions.indexOf(this.assignedPermissions[i]));
-
-                console.log(itemToRemove);
-
-                //// works: this.assignedPermissions.splice(itemsToRemove[i], 1);
-                //// this.assignedPermissions.splice(itemsToRemove[i], 1);
-            }
-
-            for (var i = 0; i < itemsToRemove.length; i++) {
-                //// this.assignedPermissions.splice(itemsToRemove[i], 1);
+                this.unassignedPermissions.push(this.assignedPermissions[itemToRemove]);
+                this.assignedPermissions.splice(itemToRemove, 1);
             }
         }
 
-        this.assignedPermissionList.forEach(function (li) {
-            console.log(li);
-        });
-
-
-        for (var i = 0; i < this.assignedPermissionList.length; i++) {
-            console.log(this.assignedPermissionList[i]);
+        if (action === "add") {
+            for (var i = 0; i < this.unassignedPermissionList.length; i++) {
+                let itemToRemove = this.unassignedPermissions.indexOf(this.unassignedPermissionList[i]);
+                this.assignedPermissions.push(this.unassignedPermissions[itemToRemove]);
+                this.unassignedPermissions.splice(itemToRemove, 1);
+            }
         }
-
-        for (var i = 0; i < unassignedPermissionList.length; i++) {
-            ////console.log(unassignedPermissionList[i].selected);
-        }
-
     }
 
     selectedRoleChange(e) {
@@ -102,6 +79,19 @@ export class RoleHome {
                 { userId: 4, userName:"SECORDJ", fullName: "Jenny Secord" }
             ];
         }
+    };
+
+    save(e) {
+
+        console.log("ASSIGNED:");
+        this.assignedPermissions.forEach(function (li) {
+            console.log(li.permissionName);
+        });
+
+        console.log("UNASSIGNED:");
+        this.unassignedPermissions.forEach(function (li) {
+            console.log(li.permissionName);
+        });
     };
 
 }

@@ -56,13 +56,11 @@
                     <div>
                         <div class="row">
                             <div class="col-xs-5">
-                                <select value.bind="assignedPermissionList" multiple size="10" class="form-control">
-                                    <option repeat.for="permission of assignedPermissions" model.bind="permission.permissionId">
+                                <select value.bind="unassignedPermissionList" multiple size="10" class="form-control">
+                                    <option repeat.for="permission of unassignedPermissions" model.bind="permission">
                                         ${permission.permissionName}
                                     </option>
                                 </select>
-                                Selected product IDs: ${assignedPermissionList}
-
                             </div>
                             <div class="col-xs-2">
                                 <div class="text-center">
@@ -73,8 +71,8 @@
                                 </div>
                             </div>
                             <div class="col-xs-5">
-                                <select id="unassignedPermissionList" value.bind="unassignedPermissionList" multiple size="10" class="form-control">
-                                    <option repeat.for="permission of unassignedPermissions" model.bind="permission.permissionId">
+                                <select value.bind="assignedPermissionList" multiple size="10" class="form-control">
+                                    <option repeat.for="permission of assignedPermissions" model.bind="permission">
                                         ${permission.permissionName}
                                     </option>
                                 </select>
@@ -82,6 +80,12 @@
                         </div>
                     </div>
 
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button type="button" class="btn btn-primary" click.trigger="save($event.target)">Save</button>
                 </div>
             </div>
 
