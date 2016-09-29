@@ -67,6 +67,22 @@ export class RoleHome {
                 this.unassignedPermissions.splice(itemToRemove, 1);
             }
         }
+
+        this.sortPermissions(this.assignedPermissions);
+        this.sortPermissions(this.unassignedPermissions);
+    }
+
+    sortPermissions(permissions) {
+        
+        if (Object.prototype.toString.call(permissions) !== '[object Array]' ) {
+            throw new Error("Invalid Input");
+        };
+
+        permissions.sort(function (a, b) {
+            if (a.permissionName < b.permissionName) return -1;
+            if (a.permissionName > b.permissionName) return 1;
+            return 0;
+        });
     }
 
     selectedRoleChange(e) {
