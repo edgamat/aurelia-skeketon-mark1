@@ -12,16 +12,11 @@ export class RoleHome {
 
     unassignedPermissions = [];
 
-    configureRouter(config, router) {
-  
-        config.map([       
-          { route: 'role-create', name: 'role-create', moduleId: './role-create', nav: false, title: 'Add Role' },  
-        ]);
+    constructor() {
 
-        this.router = router;
     }
 
-    constructor() {
+    activate() {
 
         this.roles = 
         [
@@ -47,6 +42,7 @@ export class RoleHome {
             { permissionId: 3, permissionName: "ACCOUNT CREATE" },
             { permissionId: 4, permissionName: "ACCOUNT DELETE" }
         ];
+
     }
 
     attached() {

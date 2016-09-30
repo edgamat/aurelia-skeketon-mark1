@@ -7,7 +7,7 @@ export class App {
       { route: 'users/create',  name: 'users-create', moduleId: 'users-create', nav: false, title: 'Create User' },
       { route: 'users/:id/detail', name: 'users-detail', moduleId: 'users-detail', nav: false },
       { route: 'child-router',  name: 'child-router', moduleId: 'child-router', nav: true,  title: 'Child Router' },
-      { route: 'roles',         name: 'roles',        moduleId: 'roles/role-home',   nav: true,  title: 'Role Manager' }
+      { route: 'roles',         name: 'roles',        moduleId: 'roles/roles-section',   nav: true,  title: 'Role Manager' }
 ]);
 
     this.router = router;
