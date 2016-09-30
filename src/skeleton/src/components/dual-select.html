@@ -1,0 +1,40 @@
+﻿<template>
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+            <div class="row">
+                <div class="col-xs-5"><label>Unassigned Permissions:</label></div>
+                <div class="col-xs-2"></div>
+                <div class="col-xs-5"><label>Assigned Permissions:</label></div>
+            </div>
+
+            <div>
+                <div class="row">
+                    <div class="col-xs-5">
+                        <select value.bind="selectedUnassignedPermissions" multiple size="10" class="form-control">
+                            <option repeat.for="permission of unassignedPermissions" model.bind="permission">
+                                ${permission.permissionName}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="text-center">
+                            <button type="button" class="btn btn-default btn-block btn-sm" click.trigger="movePermission($event.target, 'removeAll')" data-dual-select="removeAll"><i class="fa fa-angle-double-left"></i></button>
+                            <button type="button" class="btn btn-default btn-block btn-sm" click.trigger="movePermission($event.target, 'remove')" data-dual-select="remove"><i class="fa fa-angle-left"></i></button>
+                            <button type="button" class="btn btn-default btn-block btn-sm" click.trigger="movePermission($event.target, 'add')" data-dual-select="add"><i class="fa fa-angle-right"></i></button>
+                            <button type="button" class="btn btn-default btn-block btn-sm" click.trigger="movePermission($event.target, 'addAll')" data-dual-select="addAll"><i class="fa fa-angle-double-right"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-xs-5">
+                        <select value.bind="selectedAssignedPermissions" multiple size="10" class="form-control">
+                            <option repeat.for="permission of assignedPermissions" model.bind="permission">
+                                ${permission.permissionName}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</template>

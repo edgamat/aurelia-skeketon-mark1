@@ -4,87 +4,55 @@ export class RoleHome {
 
     selectedRoleId = 1;
 
-    assignedPermissionList = [];
+    roles = [];
 
-    unassignedPermissionList = [];
+    userRoles = [];
 
-    roles = 
-    [
-        { roleId: 1, roleName: "Admin" },
-        { roleId: 2, roleName: "Manager" },
-        { roleId: 3, roleName: "Analyst" }
-    ];
+    assignedPermissions = [];
 
-    userRoles = 
-    [
-        { userId: 1, userName: "DOEJ", fullName: "John Doe" },
-        { userId: 2, userName:"SECORDC", fullName: "Cliff Secord" }
-    ];
+    unassignedPermissions = [];
 
-    assignedPermissions = 
-    [
-        { permissionId: 1, permissionName: "ACCOUNT VIEW" },
-        { permissionId: 2, permissionName: "ACCOUNT UPDATE" }
-    ]
+    configureRouter(config, router) {
+  
+        config.map([       
+          { route: 'role-create', name: 'role-create', moduleId: './role-create', nav: false, title: 'Add Role' },  
+        ]);
 
-    unassignedPermissions = 
-    [
-        { permissionId: 3, permissionName: "ACCOUNT CREATE" },
-        { permissionId: 4, permissionName: "ACCOUNT DELETE" }
-    ]
-
-    movePermission(e, action) {
-        console.log(action);
-
-        if (action === "addAll") {
-            for (var i = 0; i < this.unassignedPermissions.length; i++) {
-                this.assignedPermissions.push(this.unassignedPermissions[i]);
-            }
-            
-            this.unassignedPermissions = [];
-        }
-
-        if (action === "removeAll") {
-            for (var i = 0; i < this.assignedPermissions.length; i++) {
-                this.unassignedPermissions.push(this.assignedPermissions[i]);
-            }
-
-            this.assignedPermissions = [];
-        }
-
-        if (action === "remove") {
-            for (var i = 0; i < this.assignedPermissionList.length; i++) {
-                let itemToRemove = this.assignedPermissions.indexOf(this.assignedPermissionList[i]);
-                this.unassignedPermissions.push(this.assignedPermissions[itemToRemove]);
-                this.assignedPermissions.splice(itemToRemove, 1);
-            }
-        }
-
-        if (action === "add") {
-            for (var i = 0; i < this.unassignedPermissionList.length; i++) {
-                let itemToRemove = this.unassignedPermissions.indexOf(this.unassignedPermissionList[i]);
-                this.assignedPermissions.push(this.unassignedPermissions[itemToRemove]);
-                this.unassignedPermissions.splice(itemToRemove, 1);
-            }
-        }
-
-        this.sortPermissions(this.assignedPermissions);
-        this.sortPermissions(this.unassignedPermissions);
+        this.router = router;
     }
 
-    sortPermissions(permissions) {
-        
-        if (Object.prototype.toString.call(permissions) !== '[object Array]' ) {
-            throw new Error("Invalid Input");
-        };
+    constructor() {
 
-        permissions.sort(function (a, b) {
-            if (a.permissionName < b.permissionName) return -1;
-            if (a.permissionName > b.permissionName) return 1;
-            return 0;
-        });
+        this.roles = 
+        [
+            { roleId: 1, roleName: "Admin" },
+            { roleId: 2, roleName: "Manager" },
+            { roleId: 3, roleName: "Analyst" }
+        ];
+
+        this.userRoles = 
+        [
+            { userId: 1, userName: "DOEJ", fullName: "John Doe" },
+            { userId: 2, userName:"SECORDC", fullName: "Cliff Secord" }
+        ];
+
+        this.assignedPermissions = 
+        [
+            { permissionId: 1, permissionName: "ACCOUNT VIEW" },
+            { permissionId: 2, permissionName: "ACCOUNT UPDATE" }
+        ];
+
+        this.unassignedPermissions = 
+        [
+            { permissionId: 3, permissionName: "ACCOUNT CREATE" },
+            { permissionId: 4, permissionName: "ACCOUNT DELETE" }
+        ];
     }
 
+    attached() {
+        console.log(this.ds);
+    }
+ 
     selectedRoleChange(e) {
         console.log(e);
 
