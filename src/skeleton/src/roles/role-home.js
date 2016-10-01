@@ -1,4 +1,7 @@
-﻿
+﻿import {inject} from 'aurelia-framework';
+import {RolesService} from '../services/roles-service.js';
+
+@inject(RolesService)
 export class RoleHome {
     heading = 'Role Manager';
 
@@ -12,18 +15,24 @@ export class RoleHome {
 
     unassignedPermissions = [];
 
-    constructor() {
-
+    constructor(rolesService) {
+        this.rolesService = rolesService;
     }
 
     activate() {
 
-        this.roles = 
-        [
-            { roleId: 1, roleName: "Admin" },
-            { roleId: 2, roleName: "Manager" },
-            { roleId: 3, roleName: "Analyst" }
-        ];
+        let allRoles = this.rolesService.getRoles()
+            .then(response => response.json())
+               .then(data => {            
+                   this.roles = data;
+               });    
+
+        ////this.roles = 
+        ////[
+        ////    { roleId: 1, roleName: "Admin" },
+        ////    { roleId: 2, roleName: "Manager" },
+        ////    { roleId: 3, roleName: "Analyst" }
+        ////];
 
         this.userRoles = 
         [

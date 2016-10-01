@@ -1,0 +1,25 @@
+{
+  "name": "Chrysalis - Mark 1",
+  "version": "1.0",
+  "development": {
+    "api": {
+      "key": "developmentkey",
+      "endpoint": "http://localhost:51875/api/",
+      "endpointProxy": "ApiProxy?route="
+    }
+  },
+  "staging": {
+    "api": {
+      "key": "somekey",
+      "endpoint": "http://api-nymir-portal.infinity-software.com/api/",
+      "endpointProxy": "ApiProxy?route="
+    }
+  },
+  "release": {
+    "api": {
+      "key": "somekey",
+      "endpoint": "http://portal-api.wrightinsurance.com/api/",
+      "endpointProxy": "ApiProxy?route="
+    }
+  }
+}

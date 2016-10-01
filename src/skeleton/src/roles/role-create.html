@@ -1,8 +1,43 @@
 ﻿<template>
-    <h2>Add Role</h2>
+    <require from="blur-image"></require>
+    <require from="./../components/dual-select"></require>
+    <section class="au-animate">
+        <h2>${heading}</h2>
 
-    <div>
-        <a route-href="route: roles" class="btn btn-primary">Cancel</a>
-    </div>
+        <form role="form" validate.bind="validation">
+            <p>
+                Please provide a name for the role and the assigned permissions.
+            </p>
 
+            <div class="row">
+                <div class="col-xs-5">
+                    <div class="form-group"
+                         validation-errors.bind="roleNameErrors"
+                         class.bind="roleNameErrors.length ? 'has-error' : ''">
+
+                        <label for="roleName" class="control-label">Role Name:</label><br />
+                        <input type="text" id="roleName" 
+                               focus="true"
+                               value.bind="roleName & validateManually" class="form-control" maxlength="20" />
+                        <span class="help-block" repeat.for="errorInfo of roleNameErrors">
+                            ${errorInfo.error.message}
+                        <span>
+                    </div>
+                </div>
+            </div>
+
+            <dual-select ref="ds"
+                         assigned-permissions.bind="assignedPermissions"
+                         unassigned-permissions.bind="unassignedPermissions"></dual-select>
+
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <a route-href="route: role-home" class="btn btn-link">Cancel</a>
+                    <button type="submit" class="btn btn-primary" click.delegate="save($event.target)">Save</button>
+                </div>
+            </div>
+
+        </form>
+
+    </section>
 </template>

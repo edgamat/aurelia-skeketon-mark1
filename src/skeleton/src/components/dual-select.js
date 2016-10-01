@@ -55,6 +55,11 @@ export class DualSelect {
         this.sortPermissions(this.unassignedPermissions);
     }
 
+    attached() {
+        this.sortPermissions(this.assignedPermissions);
+        this.sortPermissions(this.unassignedPermissions);
+    }
+
     sortPermissions(permissions) {
         
         if (Object.prototype.toString.call(permissions) !== '[object Array]' ) {

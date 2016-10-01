@@ -17,5 +17,12 @@
     
     <script>
         System.import('aurelia-bootstrapper');
+        window.isIELessThanTen = false;
     </script>
+    <!--[if lt IE 10]>
+        <script>
+            window.isIELessThanTen = true;
+        </script>
+    <![endif]-->
+
 </div>
