@@ -5,7 +5,9 @@ import {RolesService} from '../services/roles-service.js';
 export class RoleHome {
     heading = 'Role Manager';
 
-    selectedRoleId = 1;
+    selectedRoleId = 0;
+
+    selectedRole = null;
 
     roles = [];
 
@@ -21,37 +23,18 @@ export class RoleHome {
 
     activate() {
 
-        let allRoles = this.rolesService.getRoles()
+        this.rolesService.getRoles()
             .then(response => response.json())
-               .then(data => {            
-                   this.roles = data;
-               });    
+            .then(data => {            
+                this.roles = data;
 
-        ////this.roles = 
-        ////[
-        ////    { roleId: 1, roleName: "Admin" },
-        ////    { roleId: 2, roleName: "Manager" },
-        ////    { roleId: 3, roleName: "Analyst" }
-        ////];
+                if (this.roles && this.roles.length > 0) {
 
-        this.userRoles = 
-        [
-            { userId: 1, userName: "DOEJ", fullName: "John Doe" },
-            { userId: 2, userName:"SECORDC", fullName: "Cliff Secord" }
-        ];
+                    this.selectedRoleId = this.roles[0].roleId;
 
-        this.assignedPermissions = 
-        [
-            { permissionId: 1, permissionName: "ACCOUNT VIEW" },
-            { permissionId: 2, permissionName: "ACCOUNT UPDATE" }
-        ];
-
-        this.unassignedPermissions = 
-        [
-            { permissionId: 3, permissionName: "ACCOUNT CREATE" },
-            { permissionId: 4, permissionName: "ACCOUNT DELETE" }
-        ];
-
+                    this.selectedRoleChange(null);
+                }
+            });    
     }
 
     attached() {
@@ -61,16 +44,37 @@ export class RoleHome {
     selectedRoleChange(e) {
         console.log(e);
 
-        if (this.selectedRoleId === 2) {
-            this.userRoles = 
-            [
-                { userId: 3, userName: "DOEJA", fullName: "Jane Doe" },
-                { userId: 4, userName:"SECORDJ", fullName: "Jenny Secord" }
-            ];
-        }
+        this.rolesService.getRoleById(this.selectedRoleId)
+            .then(response => response.json())
+            .then(data => {            
+                this.selectedRole = data.role;
+                this.assignedPermissions = data.assignedPermissions;
+                this.unassignedPermissions = data.unassignedPermissions;
+
+                console.log(data);
+            });    
     };
 
-    save(e) {
+    deleteHandler(e) {
+
+        this.rolesService.deleteRole(this.selectedRoleId)
+           .then((result) => {
+               console.log(result);
+               this.activate();
+           });
+
+    };
+
+    saveHandler(e) {
+
+        let data = this.selectedRole; 
+
+        data.permissions = this.assignedPermissions;
+
+        this.rolesService.updateRole(this.selectedRoleId, data)
+           .then((result) => {
+               console.log(result);
+           });
 
         console.log("ASSIGNED:");
         this.assignedPermissions.forEach(function (li) {

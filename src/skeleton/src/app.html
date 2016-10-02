@@ -1,9 +1,12 @@
 <template>
 
+    <require from="./components/loading-indicator"></require>
     <require from="nav-bar.html"></require>
     <require from="bootstrap/css/bootstrap.css"></require>
 
     <nav-bar router.bind="router"></nav-bar>
+
+    <loading-indicator loading.bind="router.isNavigating || isRequesting"></loading-indicator>
 
     <div class="container page-host">
         <router-view></router-view>

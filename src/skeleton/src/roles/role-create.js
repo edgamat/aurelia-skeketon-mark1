@@ -1,8 +1,9 @@
 import {inject, NewInstance} from 'aurelia-framework';
 import {ValidationRules, ValidationController} from "aurelia-validation";
 import {RolesService} from '../services/roles-service.js';
+import {Router} from 'aurelia-router';
 
-@inject(NewInstance.of(ValidationController), RolesService)
+@inject(NewInstance.of(ValidationController), RolesService, Router)
 export class RoleCreate {
     heading = 'Add Role';
 
@@ -14,10 +15,11 @@ export class RoleCreate {
 
     unassignedPermissions = [];
 
-    constructor(controller, rolesService) {
+    constructor(controller, rolesService, router) {
 
         this.controller = controller;
         this.rolesService = rolesService;
+        this.router = router;
 
         ValidationRules.customRule(
           'duplicate',
@@ -55,6 +57,11 @@ export class RoleCreate {
                 if (v.length === 0) {
                     console.log("All is good!");
 
+                    let data = { 
+                        roleName: this.roleName, 
+                        permissions: this.assignedPermissions 
+                    };
+
                     console.log("save ASSIGNED:");
                     this.assignedPermissions.forEach(function (li) {
                         console.log(li.permissionName);
@@ -65,6 +72,11 @@ export class RoleCreate {
                         console.log(li.permissionName);
                     });
 
+                    this.rolesService.createRole(data)
+                       .then((result) => {
+                           console.log(result);
+                           this.router.navigate('role-home');
+                       });
                 }
                 else {
                     console.log("You have errors!");

@@ -1,6 +1,10 @@
 ﻿<template>
     <require from="blur-image"></require>
     <require from="./../components/dual-select"></require>
+    <div show.bind="busy.active">
+        <div class="spinner"></div>
+        <div class="spinner-blocker"></div>
+    </div>
     <section class="au-animate">
         <h2>${heading}</h2>
 
@@ -17,7 +21,8 @@
                             ${role.roleName}
                         </option>
                     </select>
-                    <br /><br />
+                    <br />
+                    <button type="button" class="btn btn-primary" click.delegate="deleteHandler($event.target)">Delete</button>
                     <a route-href="route: role-create">Add Role</a>
                 </div>
 
@@ -52,7 +57,7 @@
 
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <button type="button" class="btn btn-primary" click.delegate="save($event.target)">Save</button>
+                    <button type="button" class="btn btn-primary" click.delegate="saveHandler($event.target)">Save</button>
                 </div>
             </div>
 
