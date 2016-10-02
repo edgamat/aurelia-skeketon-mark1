@@ -47,6 +47,14 @@ namespace skeletonWebApi
                 policy.AllowCredentials();
             });
 
+            app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
+            {
+                Authority = "http://localhost:52002",
+                ScopeName = "api1",
+
+                RequireHttpsMetadata = false
+            });
+
             app.UseMvc();
         }
     }

@@ -1,3 +1,4 @@
+import authConfig from 'config/auth-config';
 import 'bootstrap';
 
 export function configure(aurelia) {
@@ -11,21 +12,12 @@ export function configure(aurelia) {
       config.setEnvironment('development');
   });
 
-  ////aurelia.use.plugin('aurelia-configuration', config => {
-  ////    config.setEnvironments({
-  ////        development: ['localhost'],
-  ////        staging: ['chrysalis.infinity-software.com'],
-  ////        release: ['chrysalis.com']
-  ////    });  
-
-  ////    if (1 == 1) {    
-  ////        //config.set('development.api.endpoint', 'ApiProxy?route=')
-  ////    }
-  ////});
-
+  aurelia.use.plugin('aurelia-authentication', baseConfig => {
+      baseConfig.configure(authConfig);
+  });  
 
   //Uncomment the line below to enable animation.
-  //aurelia.use.plugin('aurelia-animator-css');
+  aurelia.use.plugin('aurelia-animator-css');
   //if the css animator is enabled, add swap-order="after" to all router-view elements
 
   //Anyone wanting to use HTMLImports to load views, will need to install the following plugin.

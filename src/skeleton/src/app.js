@@ -1,3 +1,4 @@
+import {AuthenticateStep} from 'aurelia-authentication';
 import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
 import nprogress from 'nprogress';
@@ -13,14 +14,14 @@ export class App {
 
     configureRouter(config, router) {
         config.title = 'Chrysalis - Mark 1';
+        config.addPipelineStep('authorize', AuthenticateStep); // Add a route filter to the authorize extensibility point.
         config.map([
             { route: ['', 'welcome'], name: 'welcome',      moduleId: 'welcome',      nav: true,  title: 'Welcome' },
-            { route: 'users',         name: 'users',        moduleId: 'users',        nav: true,  title: 'Github Users' },
-            { route: 'users/create',  name: 'users-create', moduleId: 'users-create', nav: false, title: 'Create User' },
-            { route: 'users/:id/detail', name: 'users-detail', moduleId: 'users-detail', nav: false },
-            { route: 'child-router',  name: 'child-router', moduleId: 'child-router', nav: true,  title: 'Child Router' },
-            { route: 'roles',         name: 'roles',        moduleId: 'roles/roles-section',   nav: true,  title: 'Role Manager' }
-        ]);
+            { route: 'login', moduleId: './me/login', nav: false, title:'Login' },
+            { route: 'logout', moduleId: './me/logout', nav: false, title:'Logout' },
+            { route: 'roles',         name: 'roles',        moduleId: 'roles/roles-section',   nav: true,  title: 'Role Manager' },
+            { route: 'users',         name: 'users',        moduleId: 'users/users-section',   nav: true,  title: 'User Manager' }
+]);
 
         this.router = router;
     }

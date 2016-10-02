@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using skeletonEF6;
 using skeletonWebApi.Application;
 
 namespace skeletonWebApi.Controllers
 {
+    ////[Authorize]
     [Route("api/[controller]")]
     public class RolesController : Controller
     {
