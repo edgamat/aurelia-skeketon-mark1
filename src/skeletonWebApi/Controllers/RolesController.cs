@@ -26,8 +26,6 @@ namespace skeletonWebApi.Controllers
             this.AuthContext.Configuration.ProxyCreationEnabled = false;
             var roles = this.AuthContext.Roles.AsNoTracking().ToList();
 
-            System.Threading.Thread.Sleep(1000);
-
             return roles;
         }
 

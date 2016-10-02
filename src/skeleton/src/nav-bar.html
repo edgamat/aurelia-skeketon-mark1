@@ -1,4 +1,4 @@
- <template bindable="router">
+ <template bindable="router, loading">
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#skeleton-navigation-navbar-collapse">
@@ -21,8 +21,8 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li class="loader" if.bind="router.isNavigating">
-          <i class="fa fa-spinner fa-spin fa-2x"></i>
+        <li class="loader" if.bind="router.isNavigating || loading">
+          <i class="fa fa-spinner fa-spin fa-2x" style="color:#29d"></i>
         </li>
       </ul>
     </div>

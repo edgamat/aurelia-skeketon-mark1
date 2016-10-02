@@ -4,7 +4,7 @@
     <require from="nav-bar.html"></require>
     <require from="bootstrap/css/bootstrap.css"></require>
 
-    <nav-bar router.bind="router"></nav-bar>
+    <nav-bar router.bind="router" loading.bind="router.isNavigating || isRequesting"></nav-bar>
 
     <loading-indicator loading.bind="router.isNavigating || isRequesting"></loading-indicator>
 

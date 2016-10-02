@@ -8,7 +8,7 @@ export class App {
 
     constructor(http) {
         this.http = http;
-        //// nprogress.configure({ showSpinner: true }); 
+        nprogress.configure({ showSpinner: false }); 
     }
 
     configureRouter(config, router) {
