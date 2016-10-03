@@ -90,7 +90,6 @@ var configForDevelopment = {
             responseType : 'code',
             scopePrefix: '',
             scopeDelimiter: ' ',
-            display: 'popup',
             oauthType: '2.0',
             requiredUrlParams: ['scope', 'nonce'],
             optionalUrlParams: ['display', 'state'],

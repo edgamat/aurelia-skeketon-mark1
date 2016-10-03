@@ -10,7 +10,7 @@ using skeletonWebApi.Application;
 
 namespace skeletonWebApi.Controllers
 {
-    ////[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     public class RolesController : Controller
     {

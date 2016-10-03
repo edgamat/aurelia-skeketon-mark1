@@ -10,14 +10,34 @@ namespace SkeletonIdentityServer
     {
         public static IEnumerable<Scope> GetScopes()
         {
-            return new List<Scope>
+            var scopes = new List<Scope>
             {
+                StandardScopes.OpenId,
+
+                StandardScopes.ProfileAlwaysInclude,
+
+                StandardScopes.EmailAlwaysInclude,
+
+                StandardScopes.OfflineAccess,
+
+                StandardScopes.RolesAlwaysInclude,
+
                 new Scope
                 {
-                    Name = "api1",
-                    Description = "My API"
+                    Enabled = true,
+                    Name = "apiAccess",
+                    Description = "API Access",
+                    Type = ScopeType.Resource,
+                    Claims = new List<ScopeClaim>
+                    {
+                        new ScopeClaim(StandardScopes.Email.Name),
+                    },
                 }
             };
+
+            scopes.AddRange(StandardScopes.All);
+
+            return scopes;
         }
 
         public static IEnumerable<Client> GetClients()
@@ -28,9 +48,11 @@ namespace SkeletonIdentityServer
                 {
                     ClientId = "chrysalis",
                     ClientName = "Chrysalis Client",
-                    AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
-
+                    ClientUri = "http://localhost:52000",
+                    AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
                     RequireConsent = false,
+                    AllowAccessToAllScopes=false,
+                    AllowRememberConsent = true,
 
                     ClientSecrets = new List<Secret>
                     {
@@ -59,8 +81,9 @@ namespace SkeletonIdentityServer
                     {
                         StandardScopes.OpenId.Name,
                         StandardScopes.Profile.Name,
+                        StandardScopes.Email.Name,
                         StandardScopes.OfflineAccess.Name,
-                        "api1"
+                        "apiAccess"
                     }
                 }
             };
