@@ -1,4 +1,4 @@
-﻿var baseConfig = {    
+﻿var baseConfig = {
     // SPA related options
     // ===================
 
@@ -29,9 +29,9 @@
     // The API endpoint used with oAuth to unlink authentication
     //unlinkUrl: 'http://localhost:22530/ui/logout',
     // The HTTP method used for 'unlink' requests (Options: 'get' or 'post')
-    unlinkMethod: 'get', 
+    unlinkMethod: 'get',
 
-     
+
     // Token Options
     // =============
 
@@ -57,11 +57,11 @@
     useRefreshToken: true,
     // The option to enable/disable the automatic refresh of Auth tokens using Refresh Tokens
     autoUpdateToken: true,
-    
+
     // The the property from which to get the refresh token after a successful token refresh
     refreshTokenProp: 'refresh_token',
-    
-    // Miscellaneous Options 
+
+    // Miscellaneous Options
     // =====================
 
     // Whether to enable the fetch interceptor which automatically adds the authentication headers
@@ -77,7 +77,7 @@
     storageKey: 'chrysalis_authentication'
 };
 
-var configForDevelopment = {  
+var configForDevelopment = {
     providers: {
         identSrv : {
             name: 'identSrv',
@@ -96,7 +96,7 @@ var configForDevelopment = {
             state: function(){
                 var val = ((Date.now() + Math.random()) * Math.random()).toString().replace(".", "");
                 return encodeURIComponent(val);
-            },  
+            },
             nonce : function(){
                 var val = ((Date.now() + Math.random()) * Math.random()).toString().replace(".", "");
                 return encodeURIComponent(val);
@@ -106,13 +106,13 @@ var configForDevelopment = {
     }
 };
 
-var configForStaging = {  
+var configForStaging = {
     providers: {
         identSrv : {
             name: 'identSrv',
             url: 'Auth/Token/Exchange',
             authorizationEndpoint: 'http://identity-nymir-portal.infinity-software.com/connect/authorize', //if this ends with slash --> game over
-            
+
             redirectUri: window.location.origin || window.location.protocol + '//' + window.location.host,
             scope: ['apiAccess', 'openid', 'profile', 'email', 'offline_access'],
             clientId: 'nymir_portal',
@@ -126,7 +126,7 @@ var configForStaging = {
             state: function(){
                 var val = ((Date.now() + Math.random()) * Math.random()).toString().replace(".", "");
                 return encodeURIComponent(val);
-            },  
+            },
             nonce : function(){
                 var val = ((Date.now() + Math.random()) * Math.random()).toString().replace(".", "");
                 return encodeURIComponent(val);
@@ -136,13 +136,13 @@ var configForStaging = {
     }
 };
 
-var configForRelease = {  
+var configForRelease = {
     providers: {
         identSrv : {
             name: 'identSrv',
             url: 'Auth/Token/Exchange',
             authorizationEndpoint: 'http://identity.wrightinsurance.com/connect/authorize', //if this ends with slash --> game over
-            
+
             redirectUri: window.location.origin || window.location.protocol + '//' + window.location.host,
             scope: ['apiAccess', 'openid', 'profile', 'email', 'offline_access'],
             clientId: 'nymir_portal',
@@ -156,7 +156,7 @@ var configForRelease = {
             state: function(){
                 var val = ((Date.now() + Math.random()) * Math.random()).toString().replace(".", "");
                 return encodeURIComponent(val);
-            },  
+            },
             nonce : function(){
                 var val = ((Date.now() + Math.random()) * Math.random()).toString().replace(".", "");
                 return encodeURIComponent(val);
@@ -170,7 +170,7 @@ var config;
 
 if (window.location.hostname === 'localhost') {
     config = Object.assign({}, baseConfig, configForDevelopment);
-} 
+}
 else if (window.location.hostname === 'nymir-portal.wrightinsurance.com') {
     config = Object.assign({}, baseConfig, configForRelease);
 }

@@ -1,15 +1,16 @@
-import {AuthenticateStep} from 'aurelia-authentication';
+import {AuthenticateStep, FetchConfig} from 'aurelia-authentication';
 import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
 import nprogress from 'nprogress';
 
-@inject(HttpClient)
+@inject(HttpClient, FetchConfig)
 export class App {
     isRequesting = false;
 
-    constructor(http) {
+    constructor(http, fetchConfig) {
         this.http = http;
-        nprogress.configure({ showSpinner: false }); 
+        this.fetchConfig = fetchConfig;
+        nprogress.configure({ showSpinner: false });
     }
 
     configureRouter(config, router) {
@@ -18,47 +19,48 @@ export class App {
         config.map([
             { route: ['', 'welcome'], name: 'welcome',      moduleId: 'welcome',      nav: true,  title: 'Welcome' },
             { route: 'login', moduleId: './me/login', nav: false, title:'Login' },
-            { route: 'logout', moduleId: './me/logout', nav: false, title:'Logout' },
             { route: 'roles',         name: 'roles',        moduleId: 'roles/roles-section',   nav: true,  title: 'Role Manager' },
-            { route: 'users',         name: 'users',        moduleId: 'users/users-section',   nav: true,  title: 'User Manager' }
+            { route: 'users',         name: 'users',        moduleId: 'users/users-section',   nav: true,  title: 'User Manager', auth: true },
+            { route: 'logout', moduleId: './me/logout', nav: true, title:'Logout' }
 ]);
 
         this.router = router;
     }
-   
+
     activate() {
-        this.addProgressBarToHttpRequests();        
+        this.fetchConfig.configure();
+        this.addProgressBarToHttpRequests();
     }
-        
+
     addProgressBarToHttpRequests() {
         // Add the progress bar for requests
         this.http.configure(config => {
-            config 
+            config
                 .withInterceptor({
-                    request: (request) => { 
-                        this.isRequesting = true;                           
-                        return request; 
-                    },        
-                    requestError: (requestError) => { 
-                        this.isRequesting = false;                          
-                        return requestError; 
-                    },   
-                    response: (response) => { 
-                        this.isRequesting = false;  
-                        
+                    request: (request) => {
+                        this.isRequesting = true;
+                        return request;
+                    },
+                    requestError: (requestError) => {
+                        this.isRequesting = false;
+                        return requestError;
+                    },
+                    response: (response) => {
+                        this.isRequesting = false;
+
                         if (response.status == 401) {
                             this.router.navigate('login');
                             throw response;
                         }
                         else {
-                            return response; 
+                            return response;
                         }
                     },
-                    responseError: (responseError) => { 
-                        this.isRequesting = false;  
-                        return responseError; 
+                    responseError: (responseError) => {
+                        this.isRequesting = false;
+                        return responseError;
                     }
                 });
-        });  
+        });
     }
 }

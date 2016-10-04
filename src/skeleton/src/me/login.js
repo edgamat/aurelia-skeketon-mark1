@@ -7,22 +7,23 @@ export class Login {
         this.authService = authService;
     };
 
-    heading = 'Login';   
+    heading = 'Login';
 
     authenticate(name) {
         return this.authService.authenticate(name)
             .then(response => {
-                
-                console.log(`BOOGA-Auth:${this.authService.isAuthenticated()}`);
 
+                console.log(`BOOGA-Auth:${this.authService.isAuthenticated()}`);
+/*
                 if (this.authService.isAuthenticated()) {
                     return this.authService.getMe()
-                        .then(data => {		 
+                        .then(data => {
 
                             console.log(data);
 
-                        });		 
-                } 
+                        });
+                }
+*/
             });
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -29,6 +30,10 @@ namespace skeletonWebApi
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            var scopePolicy = new AuthorizationPolicyBuilder()
+                .RequireClaim("scope", "apiAccess")
+                .Build();
+
             services.AddMvc();
             services.AddScoped<AuthContext>(_ => new AuthContext(Configuration.GetConnectionString("DefaultConnection")));
         }
@@ -50,7 +55,7 @@ namespace skeletonWebApi
             app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
             {
                 Authority = "http://localhost:52002",
-                ScopeName = "api1",
+                ScopeName = "apiAccess",
 
                 RequireHttpsMetadata = false
             });

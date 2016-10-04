@@ -13,23 +13,21 @@ namespace SkeletonIdentityServer
             var scopes = new List<Scope>
             {
                 StandardScopes.OpenId,
-
                 StandardScopes.ProfileAlwaysInclude,
-
                 StandardScopes.EmailAlwaysInclude,
-
                 StandardScopes.OfflineAccess,
-
                 StandardScopes.RolesAlwaysInclude,
 
                 new Scope
                 {
                     Enabled = true,
                     Name = "apiAccess",
+                    DisplayName = "ApiAccess",
                     Description = "API Access",
                     Type = ScopeType.Resource,
                     Claims = new List<ScopeClaim>
                     {
+                        new ScopeClaim("role"),
                         new ScopeClaim(StandardScopes.Email.Name),
                     },
                 }
@@ -50,14 +48,21 @@ namespace SkeletonIdentityServer
                     ClientName = "Chrysalis Client",
                     ClientUri = "http://localhost:52000",
                     AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
-                    RequireConsent = false,
-                    AllowAccessToAllScopes=false,
+                    RequireConsent = true,
+                    AllowAccessToAllScopes = false,
                     AllowRememberConsent = true,
 
                     ClientSecrets = new List<Secret>
                     {
                         new Secret("secret".Sha256())
                     },
+
+                    AccessTokenLifetime = 1200, // 20 minutes
+
+                    RefreshTokenUsage = TokenUsage.OneTimeOnly,
+                    RefreshTokenExpiration = TokenExpiration.Sliding,
+                    SlidingRefreshTokenLifetime = 28800, // 8 hours
+                    AbsoluteRefreshTokenLifetime = 57600, // 16 hours
 
                     RedirectUris = new List<string>
                     {
@@ -82,6 +87,7 @@ namespace SkeletonIdentityServer
                         StandardScopes.OpenId.Name,
                         StandardScopes.Profile.Name,
                         StandardScopes.Email.Name,
+                        StandardScopes.Roles.Name,
                         StandardScopes.OfflineAccess.Name,
                         "apiAccess"
                     }
