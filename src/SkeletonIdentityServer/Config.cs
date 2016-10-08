@@ -48,7 +48,7 @@ namespace SkeletonIdentityServer
                     ClientName = "Chrysalis Client",
                     ClientUri = "http://localhost:52000",
                     AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
-                    RequireConsent = true,
+                    RequireConsent = false,
                     AllowAccessToAllScopes = false,
                     AllowRememberConsent = true,
 

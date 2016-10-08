@@ -1,5 +1,52 @@
 ﻿<template>
     <section class="au-animate">
         <h2>${heading}</h2>
+
+        <div>
+            <p>
+                Choose a user from the list below. You can type in values to quickly filter the list.
+            </p>
+            <br />
+            <div>
+
+                <table class="table table-bordered table-stripped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Email Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr repeat.for="user of userRecords">
+
+                            <td>${user.id}</td>
+                            <td>${user.userName}</td>
+                            <td>${user.email}</td>
+
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">
+                                <nav aria-label="Page navigation">
+                                    <ul class="pager">
+                                        <li if.bind="disableStart" class="${startCss}"><span><span aria-hidden="true">&larr;</span> Prev</span></li>
+                                        <li if.bind="!disableStart" class="${startCss}"><a click.delegate="prevUserRecords()" href="#"><span aria-hidden="true">&larr;</span> Prev</a></li>
+                                        <li if.bind="!disableEnd" class="${endCss}"><a click.delegate="nextUserRecords()" href="#">Next <span aria-hidden="true">&rarr;</span></a></li>
+                                        <li if.bind="disableEnd" class="${endCss}"><span>Next <span aria-hidden="true">&rarr;</span></span></li>
+                                    </ul>
+                                </nav>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+
+            <div>userRecordCount: ${userRecordCount}</div>
+
+        </div>
     </section>
+
 </template>

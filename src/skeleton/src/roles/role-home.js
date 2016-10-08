@@ -25,7 +25,7 @@ export class RoleHome {
 
         this.rolesService.getRoles()
             .then(response => response.json())
-            .then(data => {            
+            .then(data => {
                 this.roles = data;
 
                 if (this.roles && this.roles.length > 0) {
@@ -34,25 +34,25 @@ export class RoleHome {
 
                     this.selectedRoleChange(null);
                 }
-            });    
+            });
     }
 
     attached() {
         console.log(this.ds);
     }
- 
+
     selectedRoleChange(e) {
         console.log(e);
 
         this.rolesService.getRoleById(this.selectedRoleId)
             .then(response => response.json())
-            .then(data => {            
+            .then(data => {
                 this.selectedRole = data.role;
                 this.assignedPermissions = data.assignedPermissions;
                 this.unassignedPermissions = data.unassignedPermissions;
 
                 console.log(data);
-            });    
+            });
     };
 
     deleteHandler(e) {
@@ -67,7 +67,7 @@ export class RoleHome {
 
     saveHandler(e) {
 
-        let data = this.selectedRole; 
+        let data = this.selectedRole;
 
         data.permissions = this.assignedPermissions;
 

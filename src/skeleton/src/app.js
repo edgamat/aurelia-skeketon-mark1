@@ -20,7 +20,7 @@ export class App {
             { route: ['', 'welcome'], name: 'welcome',      moduleId: 'welcome',      nav: true,  title: 'Welcome' },
             { route: 'login', moduleId: './me/login', nav: false, title:'Login' },
             { route: 'roles',         name: 'roles',        moduleId: 'roles/roles-section',   nav: true,  title: 'Role Manager' },
-            { route: 'users',         name: 'users',        moduleId: 'users/users-section',   nav: true,  title: 'User Manager', auth: true },
+            { route: 'users',         name: 'users',        moduleId: 'users/users-section',   nav: true,  title: 'User Manager' },
             { route: 'logout', moduleId: './me/logout', nav: true, title:'Logout' }
 ]);
 
