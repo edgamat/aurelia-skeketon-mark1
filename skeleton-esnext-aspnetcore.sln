@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "skeletonEF6", "skeletonEF6\
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SkeletonIdentityServer", "src\SkeletonIdentityServer\SkeletonIdentityServer.xproj", "{09A25CA1-B3B5-4A09-917B-7B74F1C64FC8}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SkeletonWeb", "src\skeletonWeb\SkeletonWeb.xproj", "{32283DB1-22B1-4F2E-B5A8-0ADACFAD159E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{09A25CA1-B3B5-4A09-917B-7B74F1C64FC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09A25CA1-B3B5-4A09-917B-7B74F1C64FC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09A25CA1-B3B5-4A09-917B-7B74F1C64FC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32283DB1-22B1-4F2E-B5A8-0ADACFAD159E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32283DB1-22B1-4F2E-B5A8-0ADACFAD159E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32283DB1-22B1-4F2E-B5A8-0ADACFAD159E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32283DB1-22B1-4F2E-B5A8-0ADACFAD159E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,5 +56,6 @@ Global
 		{5752CA2C-8E80-4F3A-B3A2-C02CB78FBEF6} = {2020AC68-78E1-4D95-AF3C-2186B9362078}
 		{5F4F4CD3-5769-47FD-9F77-4EFB07CDB105} = {2020AC68-78E1-4D95-AF3C-2186B9362078}
 		{09A25CA1-B3B5-4A09-917B-7B74F1C64FC8} = {2020AC68-78E1-4D95-AF3C-2186B9362078}
+		{32283DB1-22B1-4F2E-B5A8-0ADACFAD159E} = {2020AC68-78E1-4D95-AF3C-2186B9362078}
 	EndGlobalSection
 EndGlobal
